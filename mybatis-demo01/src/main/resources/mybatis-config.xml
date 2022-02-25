@@ -59,7 +59,7 @@
     <!-- 引入映射文件 -->
     <mappers>
         <!-- 引入指定的映射文件-->
-        <mapper resource="com/hxz/mybatis/mapper/UserMapper.xml"/>
+<!--        <mapper resource="com/hxz/mybatis/mapper/UserMapper.xml"/>-->
         <!--
             批量引入
             注意：批量引入时需要注意mapper接口和mapper映射文件包名和文件名一致

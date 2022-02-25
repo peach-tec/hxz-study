@@ -2,6 +2,7 @@ package com.hxz.test;
 
 import com.hxz.mybatis.entity.User;
 import com.hxz.mybatis.mapper.UserMapper;
+import com.hxz.mybatis.utils.MybatisUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -48,8 +49,8 @@ public class TestDemo {
     }
 
     @Test
-    public void test003() throws IOException {
-        UserMapper mapper = getMapper();
+    public void test003() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
         List<User> users = mapper.listUsers();
         users.forEach(System.out::println);
     }
