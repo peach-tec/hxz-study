@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 指定命名空间，指向对应的mapper接口 -->
+<mapper namespace="com.hxz.mybatis.mapper.UserMapper">
+
+    <!-- id 指向mapper接口的方法名 -->
+    <insert id="insertUser">
+        insert into t_user (username, password, age, sex, email)
+        VALUES (#{username}, #{password}, #{age}, #{sex}, #{email})
+    </insert>
+    <select id="getById" resultType="com.hxz.mybatis.entity.User">
+        select *
+        from t_user
+        where id = #{id}
+    </select>
+    <select id="listUsers" resultType="User">
+        select *
+        from t_user
+    </select>
+</mapper>
