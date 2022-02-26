@@ -67,4 +67,9 @@ public interface UserMapper {
      * 批量删除
      */
     int deleteBatch(@Param("ids")String ids);
+
+    /**
+     * 通过username批量删除
+     */
+    int deleteBatchByUsername(@Param("username") String usernames);
 }

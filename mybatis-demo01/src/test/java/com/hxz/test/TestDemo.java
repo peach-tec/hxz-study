@@ -109,6 +109,13 @@ public class TestDemo {
         System.out.println("删除了 " + count + " 行数据");
     }
 
+    @Test
+    public void test011() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        int count = mapper.deleteBatchByUsername("'test5','test6'");
+        System.out.println("删除了 " + count + " 行数据");
+    }
+
 
     private UserMapper getMapper() throws IOException {
         // 加载核心配置文件

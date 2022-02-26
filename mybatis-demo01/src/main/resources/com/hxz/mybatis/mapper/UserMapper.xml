@@ -16,15 +16,15 @@
         <!-- delete from t_user where id in (#{ids}) -->
         <!-- 正确示例： -->
         delete from t_user where id in (${ids})
-        <!--  -->
-        <!--  -->
-        <!--  -->
+    </delete>
+    <delete id="deleteBatchByUsername">
+        delete from t_user where username in (${username})
     </delete>
     <select id="getById" resultType="com.hxz.mybatis.entity.User">
-        select *        from t_user        where id = #{id}
+        select * from t_user where id = #{id}
     </select>
     <select id="listUsers" resultType="User">
-        select *        from t_user    </select>
+        select * from t_user </select>
     <select id="getByUsername" resultType="com.hxz.mybatis.entity.User">
         <!-- select * from t_user where username = #{username} -->
         select * from t_user where username = '${username}'
