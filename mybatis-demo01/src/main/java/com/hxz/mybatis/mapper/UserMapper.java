@@ -62,4 +62,9 @@ public interface UserMapper {
      * 模糊查询
      */
     List<User> getUserByLike(@Param("username") String username);
+
+    /**
+     * 批量删除
+     */
+    int deleteBatch(@Param("ids")String ids);
 }
