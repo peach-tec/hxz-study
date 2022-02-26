@@ -54,6 +54,12 @@ public interface UserMapper {
     /**
      * 查询所有的数据并转成map
      */
-    @MapKey("id") // 标识map的键，取数据库中的唯一值的字段
+    @MapKey("id")
+    // 标识map的键，取数据库中的唯一值的字段
     Map<String, Object> mapUser();
+
+    /**
+     * 模糊查询
+     */
+    List<User> getUserByLike(@Param("username") String username);
 }

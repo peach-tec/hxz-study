@@ -42,4 +42,13 @@
     <select id="mapUser" resultType="java.util.Map">
         select * from t_user;
     </select>
+    <select id="getUserByLike" resultType="com.hxz.mybatis.entity.User">
+        <!-- 通过#{}占位符获取参数时抛出异常，因为不能识别占位符 -->
+        <!-- select * from t_user where username like '%#{username}%' -->
+        <!-- 正确示例： -->
+        <!-- select * from t_user where username like '%${username}%' -->
+        <!-- select * from t_user where username like concat('%',#{username},'%') -->
+        <!--  -->
+        select * from t_user where username like "%"#{username}"%"
+    </select>
 </mapper>

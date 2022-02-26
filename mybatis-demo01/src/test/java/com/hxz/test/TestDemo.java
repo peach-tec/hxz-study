@@ -95,6 +95,13 @@ public class TestDemo {
         System.out.println(user.toString());
     }
 
+    @Test
+    public void test009() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        List<User> users = mapper.getUserByLike("test");
+        System.out.println(users.toString());
+    }
+
 
     private UserMapper getMapper() throws IOException {
         // 加载核心配置文件
@@ -110,5 +117,14 @@ public class TestDemo {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         return userMapper;
+    }
+
+    @Test
+    public void addTestData() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        for (int i = 1; i <= 100; i++) {
+            User user = new User("test" + i, "123456" + i, i, i % 2 == 0 ? "男" : "女", "5236" + i + "qq.com");
+            mapper.insertUser(user);
+        }
     }
 }
