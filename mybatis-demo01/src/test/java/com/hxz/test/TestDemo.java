@@ -11,7 +11,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 華小灼
@@ -53,6 +55,44 @@ public class TestDemo {
         UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
         List<User> users = mapper.listUsers();
         users.forEach(System.out::println);
+    }
+
+    @Test
+    public void test004() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        User user = mapper.getByUsername("testuser");
+        System.out.println(user.toString());
+    }
+
+    @Test
+    public void test005() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        User user = mapper.getByUsernameAndPassword("testuser", "123456");
+        System.out.println(user.toString());
+    }
+
+    @Test
+    public void test006() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("username", "testuser");
+        params.put("password", "123456");
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        User user = mapper.getByParams(params);
+        System.out.println(user.toString());
+    }
+
+    @Test
+    public void test007() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        User user = mapper.getUser("testuser", "123456");
+        System.out.println(user.toString());
+    }
+
+    @Test
+    public void test008() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        Map<String, Object> user = mapper.mapUser();
+        System.out.println(user.toString());
     }
 
 

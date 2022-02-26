@@ -7,6 +7,7 @@
 
     <!-- id 指向mapper接口的方法名 -->
     <insert id="insertUser">
+        <!-- 直接取属性名 -->
         insert into t_user (username, password, age, sex, email)
         VALUES (#{username}, #{password}, #{age}, #{sex}, #{email})
     </insert>
@@ -18,5 +19,27 @@
     <select id="listUsers" resultType="User">
         select *
         from t_user
+    </select>
+    <select id="getByUsername" resultType="com.hxz.mybatis.entity.User">
+        <!-- select * from t_user where username = #{username} -->
+        select * from t_user where username = '${username}'
+    </select>
+    <select id="getByUsernameAndPassword" resultType="com.hxz.mybatis.entity.User">
+        <!-- 直接使用参数名来获取会抛出org.apache.ibatis.binding.BindingException: Parameter 'username' not found. Available parameters are [arg1, arg0, param1, param2] 异常 -->
+        <!-- 错误示例：select * from t_user where username = #{username} and password = #{password} -->
+        <!-- 正确示例： -->
+        <!-- select * from t_user where username = #{arg0} and password = #{arg1} -->
+        select * from t_user where username = #{param1} and password = #{param2}
+    </select>
+    <select id="getByParams" resultType="com.hxz.mybatis.entity.User">
+        <!-- 取map集合中的键 -->
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+    <select id="getUser" resultType="com.hxz.mybatis.entity.User">
+        <!-- 使用了@Param注解标识参数，Mybatis会使用@Param注解的value值将参数放在map集合中，这个时候只能使用@Param注解的value值来获取参数 -->
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+    <select id="mapUser" resultType="java.util.Map">
+        select * from t_user;
     </select>
 </mapper>
