@@ -56,4 +56,9 @@
         <!--  -->
         select * from t_user where username like "%"#{username}"%"
     </select>
+    <select id="getUserByTableName" resultType="com.hxz.mybatis.entity.User">
+        <!-- 表名是不加单引号的，所以不能使用#{}占位符的方式 -->
+        <!-- select * from #{tableName} -->
+        select * from ${tableName}
+    </select>
 </mapper>

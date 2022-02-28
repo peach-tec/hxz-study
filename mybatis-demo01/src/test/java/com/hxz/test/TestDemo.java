@@ -116,6 +116,13 @@ public class TestDemo {
         System.out.println("删除了 " + count + " 行数据");
     }
 
+    @Test
+    public void test012() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        List<User> users = mapper.getUserByTableName("t_user");
+        users.forEach(System.out::println);
+    }
+
 
     private UserMapper getMapper() throws IOException {
         // 加载核心配置文件

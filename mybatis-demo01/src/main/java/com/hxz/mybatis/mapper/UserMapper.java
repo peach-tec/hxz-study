@@ -72,4 +72,9 @@ public interface UserMapper {
      * 通过username批量删除
      */
     int deleteBatchByUsername(@Param("username") String usernames);
+
+    /**
+     * 查询指定表的数据
+     */
+    List<User> getUserByTableName(@Param("tableName") String tableName);
 }
