@@ -7,6 +7,11 @@
     <!-- 引入properties 文件 -->
     <properties resource="jdbc.properties"/>
 
+    <!--    <settings>-->
+    <!-- 开启驼峰命名，将下划线自动映射成驼峰名 -->
+    <!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--    </settings>-->
+
     <!-- 类型别名 -->
     <typeAliases>
         <!--
@@ -14,7 +19,7 @@
             在mapper映射文件中返回类可以直接使用别名，使用时不区分大小写
             如果不设置alias属性，默认使用类型，并且不区分大小写
         -->
-<!--        <typeAlias type="com.hxz.mybatis.entity.User" alias="User"/>-->
+        <!--        <typeAlias type="com.hxz.mybatis.entity.User" alias="User"/>-->
         <!-- package 设置某个包下面的类别名(批量设置)，设置为默认的别名 -->
         <package name="com.hxz.mybatis.entity"/>
     </typeAliases>
@@ -59,7 +64,7 @@
     <!-- 引入映射文件 -->
     <mappers>
         <!-- 引入指定的映射文件-->
-<!--        <mapper resource="com/hxz/mybatis/mapper/UserMapper.xml"/>-->
+        <!--        <mapper resource="com/hxz/mybatis/mapper/UserMapper.xml"/>-->
         <!--
             批量引入
             注意：批量引入时需要注意mapper接口和mapper映射文件包名和文件名一致
