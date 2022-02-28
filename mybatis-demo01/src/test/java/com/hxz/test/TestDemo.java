@@ -37,7 +37,7 @@ public class TestDemo {
         SqlSession sqlSession = build.openSession();
         // 获取mapper接口对象
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        int result = userMapper.insertUser(new User("user01", "123456", 20, "男", "78452@qq.com"));
+        int result = userMapper.saveUser(new User("user01", "123456", 20, "男", "78452@qq.com"));
         System.out.println("返回的结果：" + result);
         // 提交事务
         sqlSession.commit();
@@ -123,6 +123,14 @@ public class TestDemo {
         users.forEach(System.out::println);
     }
 
+    @Test
+    public void test013() {
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        User user = new User("HXZ1", "123456", 28, "男", "184821@qq.com");
+        Integer row = mapper.saveUser(user);
+        System.out.println("执行的行数：" + row);
+        System.out.println("执行后的用户：" + user.toString());
+    }
 
     private UserMapper getMapper() throws IOException {
         // 加载核心配置文件
@@ -145,7 +153,7 @@ public class TestDemo {
         UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
         for (int i = 1; i <= 100; i++) {
             User user = new User("test" + i, "123456" + i, i, i % 2 == 0 ? "男" : "女", "5236" + i + "qq.com");
-            mapper.insertUser(user);
+            mapper.saveUser(user);
         }
     }
 }

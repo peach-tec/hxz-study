@@ -11,6 +11,13 @@
         insert into t_user (username, password, age, sex, email)
         VALUES (#{username}, #{password}, #{age}, #{sex}, #{email})
     </insert>
+    <!--
+        useGeneratedKeys：设置当前标签中的sql使用自增主键
+        keyProperty：将自增主键的值赋值给传输到映射文件中参数的某个属性
+     -->
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user (username, password, age, sex, email) VALUES (#{username}, #{password}, #{age}, #{sex}, #{email})
+    </insert>
     <delete id="deleteBatch">
         <!-- #{}的方式会自动添加单引号导致ID格式错误而抛出异常 -->
         <!-- delete from t_user where id in (#{ids}) -->

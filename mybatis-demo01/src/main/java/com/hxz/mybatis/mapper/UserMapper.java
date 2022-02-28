@@ -77,4 +77,9 @@ public interface UserMapper {
      * 查询指定表的数据
      */
     List<User> getUserByTableName(@Param("tableName") String tableName);
+
+    /**
+     * 新增后获取自增主键的值
+     */
+    Integer saveUser(User user);
 }
