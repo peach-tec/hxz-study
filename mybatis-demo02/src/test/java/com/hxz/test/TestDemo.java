@@ -1,8 +1,11 @@
 package com.hxz.test;
 
+import com.hxz.mybatis.entity.Emp;
 import com.hxz.mybatis.mapper.EmpMapper;
 import com.hxz.mybatis.utils.MybatisUtils;
 import org.junit.Test;
+
+import java.util.List;
 
 /**
  * @author 華小灼
@@ -24,4 +27,20 @@ public class TestDemo {
         EmpMapper emps = MybatisUtils.getMapper(EmpMapper.class);
         emps.listAll2().forEach(System.out::println);
     }
+
+    @Test
+    public void testDemo03() {
+        EmpMapper emps = MybatisUtils.getMapper(EmpMapper.class);
+        emps.listAll3().forEach(System.out::println);
+    }
+    @Test
+    public void testDemo04() {
+        EmpMapper emps = MybatisUtils.getMapper(EmpMapper.class);
+        List<Emp> emps1 = emps.listAll3();
+        Emp emp = emps1.get(0);
+        System.out.println(emp.getEmpName());
+        System.out.println("*************************分割线*************************");
+        System.out.println(emp.getDept());
+    }
+
 }

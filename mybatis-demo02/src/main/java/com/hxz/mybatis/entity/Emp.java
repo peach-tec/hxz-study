@@ -18,6 +18,64 @@ public class Emp implements Serializable {
     private String email;
     private Integer did;
 
+    private Dept dept;
+
+    public void setEid(Integer eid) {
+        this.eid = eid;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
+    }
+
+    public Integer getEid() {
+        return eid;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
     @Override
     public String toString() {
         return "Emp{" +
@@ -27,6 +85,7 @@ public class Emp implements Serializable {
                 ", sex='" + sex + '\'' +
                 ", email='" + email + '\'' +
                 ", did=" + did +
+                ", dept=" + dept +
                 '}';
     }
 

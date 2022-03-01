@@ -17,5 +17,8 @@ public interface EmpMapper {
      * 查询所有
      */
     List<Emp> listAll();
+
     List<Emp> listAll2();
+
+    List<Emp> listAll3();
 }

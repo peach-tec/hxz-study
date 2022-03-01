@@ -25,4 +25,37 @@
     <select id="listAll2" resultMap="empResultMap">
         select * from t_emp
     </select>
+
+    <!-- 多对一 -->
+    <resultMap id="empAndDept" type="com.hxz.mybatis.entity.Emp">
+        <result column="eid" property="eid"/>
+        <result column="emp_name" property="empName"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="email" property="email"/>
+        <result column="did" property="did"/>
+        <!-- 通过级联属性赋值 -->
+        <!--        <result column="did" property="dept.did"/>-->
+        <!--        <result column="dept_name" property="dept.deptName"/>-->
+        <!-- 通过 association 标签 -->
+        <!--        <association property="dept" javaType="com.hxz.mybatis.entity.Dept">-->
+        <!--            <result column="did" property="did"/>-->
+        <!--            <result column="dept_name" property="deptName"/>-->
+        <!--        </association>-->
+        <!--
+            分步查询，延迟加载
+                select：属性指定下一步进行的sql唯一标识(namespace.SQLID 或者mapper接口全类名.方法名)
+                column：指定关联的属性，分布查询的条件
+                fetchType：当开启了全局延迟加载后，可通过此属性手动控制延迟加载的效果，eager立即执行，lazy延迟加载
+        -->
+        <association property="dept" select="com.hxz.mybatis.mapper.EmpMapper.getDept" column="did"/>
+    </resultMap>
+    <select id="listAll3" resultMap="empAndDept">
+        select * from t_emp join t_dept on t_emp.did = t_dept.did
+    </select>
+
+    <!-- 查询部门信息 -->
+    <select id="getDept" resultType="com.hxz.mybatis.entity.Dept">
+        select * from t_dept where did = #{did}
+    </select>
 </mapper>
