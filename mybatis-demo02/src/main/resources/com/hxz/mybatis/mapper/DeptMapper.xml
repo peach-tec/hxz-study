@@ -4,4 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxz.mybatis.mapper.DeptMapper">
 
+    <resultMap id="deptAndEmp" type="com.hxz.mybatis.entity.Dept">
+        <result property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
+        <!-- 一对多 -->
+        <collection property="emps" ofType="com.hxz.mybatis.entity.Emp">
+            <result property="did" column="did"/>
+            <result property="eid" column="eid"/>
+            <result property="age" column="age"/>
+            <result property="sex" column="sex"/>
+            <result property="email" column="email"/>
+            <result property="empName" column="emp_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="listAll" resultMap="deptAndEmp">
+        select *
+        from t_dept
+                 join t_emp on t_dept.did = t_emp.did
+    </select>
+
+    <resultMap id="deptAndEmpStep" type="com.hxz.mybatis.entity.Dept">
+        <result property="did" column="did"/>
+        <result property="deptName" column="dept_name"/>
+        <!-- 一对多, 分步查询 -->
+        <collection property="emps" select="com.hxz.mybatis.mapper.DeptMapper.listEmp" column="did"/>
+    </resultMap>
+    <select id="listByStep" resultMap="deptAndEmpStep">
+        select * from t_dept
+    </select>
+    <select id="listEmp" resultType="com.hxz.mybatis.entity.Emp">
+        select * from t_emp where did = #{did}
+    </select>
 </mapper>

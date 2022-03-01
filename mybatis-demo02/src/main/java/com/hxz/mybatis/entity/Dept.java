@@ -1,6 +1,7 @@
 package com.hxz.mybatis.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author 華小灼
@@ -14,6 +15,15 @@ public class Dept implements Serializable {
     private Integer did;
     private String deptName;
 
+    private List<Emp> emps;
+
+    public List<Emp> getEmps() {
+        return emps;
+    }
+
+    public void setEmps(List<Emp> emps) {
+        this.emps = emps;
+    }
 
     public Integer getDid() {
         return did;
@@ -36,6 +46,7 @@ public class Dept implements Serializable {
         return "Dept{" +
                 "did=" + did +
                 ", deptName='" + deptName + '\'' +
+                ", emps=" + emps +
                 '}';
     }
 

@@ -1,6 +1,7 @@
 package com.hxz.test;
 
 import com.hxz.mybatis.entity.Emp;
+import com.hxz.mybatis.mapper.DeptMapper;
 import com.hxz.mybatis.mapper.EmpMapper;
 import com.hxz.mybatis.utils.MybatisUtils;
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class TestDemo {
         EmpMapper emps = MybatisUtils.getMapper(EmpMapper.class);
         emps.listAll3().forEach(System.out::println);
     }
+
     @Test
     public void testDemo04() {
         EmpMapper emps = MybatisUtils.getMapper(EmpMapper.class);
@@ -43,4 +45,15 @@ public class TestDemo {
         System.out.println(emp.getDept());
     }
 
+    @Test
+    public void testDemo05() {
+        DeptMapper deptMapper = MybatisUtils.getMapper(DeptMapper.class);
+        deptMapper.listAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void testDemo06() {
+        DeptMapper deptMapper = MybatisUtils.getMapper(DeptMapper.class);
+        deptMapper.listByStep().forEach(System.out::println);
+    }
 }
