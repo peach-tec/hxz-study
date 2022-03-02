@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxz.mybatis.mapper.DynamicSQLMapper">
+    <insert id="insertBatch">
+        insert into t_emp (emp_name, age, sex, email, did) values
+        <foreach collection="emps" item="emp" separator=",">
+            (#{emp.empName}, #{emp.age}, #{emp.sex}, #{emp.email}, #{emp.did})
+        </foreach>
+    </insert>
+    <delete id="deleteBatch">
+        delete from t_emp where eid in
+        <!--
+            foreach: 循环遍历
+                collection：需要遍历的参数，数组或集合
+                item：每一个元素
+                open：开始符号
+                close：结束符号
+                separator：分割符
+         -->
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="listEmp1" resultType="com.hxz.mybatis.entity.Emp">
+        select * from t_emp where 1 = 1
+        <if test="empName != null and empName != ''">
+            and emp_name = #{empName}
+        </if>
+        <if test="age != null and age != ''">
+            and age = #{age}
+        </if>
+        <if test="email != null and email != ''">
+            and email = #{email}
+        </if>
+    </select>
+    <select id="listEmp2" resultType="com.hxz.mybatis.entity.Emp">
+        select * from t_emp
+        <where>
+            <if test="empName != null and empName != ''">
+                and emp_name = #{empName}
+            </if>
+            <if test="age != null and age != ''">
+                and age = #{age}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+        </where>
+    </select>
+    <select id="listEmp3" resultType="com.hxz.mybatis.entity.Emp">
+        select * from t_emp
+        <!--
+            prefix/suffix：将trim标签中的内容前面或后面添加指定的内容
+            prefixOverrides/suffixOverrides：将trim标签中的内容前面或后面去掉指定的内容
+         -->
+        <trim prefix="where" prefixOverrides="" suffix="" suffixOverrides="and|or">
+            <where>
+                <if test="empName != null and empName != ''">
+                    emp_name = #{empName} and
+                </if>
+                <if test="age != null and age != ''">
+                    age = #{age} and
+                </if>
+                <if test="email != null and email != ''">
+                    email = #{email} or
+                </if>
+            </where>
+        </trim>
+    </select>
+    <select id="listEmp4" resultType="com.hxz.mybatis.entity.Emp">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="empName != null and empName != ''">
+                    and emp_name = #{empName}
+                </when>
+                <when test="age != null and age != ''">
+                    and age = #{age}
+                </when>
+                <otherwise>
+                    and did = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- 定义sql片段 -->
+    <sql id="empColunms">
+        eid,emp_name,age,sex,email,did
+    </sql>
+    <select id="listEmp5" resultType="com.hxz.mybatis.entity.Emp">
+        select
+        <!-- 引入sql片段 -->
+        <include refid="empColunms"/>
+        from t_emp
+    </select>
+</mapper>
