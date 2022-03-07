@@ -30,6 +30,11 @@
         <package name="com.hxz.mybatis.entity"/>
     </typeAliases>
 
+    <!-- 分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
     <!--
         environments配置多个数据库环境
         属性：

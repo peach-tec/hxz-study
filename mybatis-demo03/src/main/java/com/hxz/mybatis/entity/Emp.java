@@ -198,4 +198,16 @@ public class Emp {
     public void setDid(Integer did) {
         this.did = did;
     }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "eid=" + eid +
+                ", empName='" + empName + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", email='" + email + '\'' +
+                ", did=" + did +
+                '}';
+    }
 }
