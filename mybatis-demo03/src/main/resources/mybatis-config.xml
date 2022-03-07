@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 根节点 -->
+<configuration>
+    <!-- 引入properties 文件 -->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!--     开启驼峰命名，将下划线自动映射成驼峰名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 日志输出 -->
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 开启延时加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 开启二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!-- 类型别名 -->
+    <typeAliases>
+        <!--
+            typeAlias 设置某个类型的别名(单个设置)
+            在mapper映射文件中返回类可以直接使用别名，使用时不区分大小写
+            如果不设置alias属性，默认使用类型，并且不区分大小写
+        -->
+        <!--        <typeAlias type="com.hxz.mybatis.entity.User" alias="User"/>-->
+        <!-- package 设置某个包下面的类别名(批量设置)，设置为默认的别名 -->
+        <package name="com.hxz.mybatis.entity"/>
+    </typeAliases>
+
+    <!--
+        environments配置多个数据库环境
+        属性：
+            default：默认使用的环境，指定环境ID
+     -->
+    <environments default="development">
+        <!--
+            environment具体的环境配置
+            属性：
+                id：连接数据库环境的唯一标识，不能重复
+        -->
+        <environment id="development">
+            <!--
+                transactionManager事务管理器
+                属性：
+                    事务管理器类型 type="JDBC|MANAGED"
+                        JDBC：执行SQL时使用原生事务管理器，需要手动提交/回滚事务
+                        MANAGED：被管理，如spring管理事务
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+                dataSource配置数据源
+                属性：
+                    数据源类型 type="POOLED|UNPOOLED|JNDI"
+                        POOLED：使用数据库连接池缓存数据库连接
+                        UNPOOLED：不使用数据库连接池
+                        JNDI：使用上下文的数据源
+             -->
+            <dataSource type="POOLED">
+                <!-- 具体的属性 可以通过 ${} 的形式引入properties的参数 -->
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 引入映射文件 -->
+    <mappers>
+        <!-- 引入指定的映射文件-->
+        <!--        <mapper resource="com/hxz/mybatis/mapper/UserMapper.xml"/>-->
+        <!--
+            批量引入
+            注意：批量引入时需要注意mapper接口和mapper映射文件包名和文件名一致
+        -->
+        <package name="com.hxz.mybatis.mapper"/>
+    </mappers>
+</configuration>

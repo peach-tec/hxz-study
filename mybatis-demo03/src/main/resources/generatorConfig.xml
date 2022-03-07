@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--
+        targetRuntime:执行生成逆向工程的版本
+            MyBatis3Simple:生成基本的CRUD
+            MyBatis3:生成带条件的CRUD
+    -->
+    <context id="DB2Table" targetRuntime="MyBatis3">
+        <!-- 数据库连接信息 -->
+        <jdbcConnection
+                driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="jdbc:mysql://192.168.0.109/mybatis"
+                userId="root"
+                password="123456"
+        />
+        <!-- java实体类的生成策略 -->
+        <!--
+            targetPackage:包名
+            targetProject:目标工程
+        -->
+        <javaModelGenerator targetPackage="com.hxz.mybatis.entity" targetProject=".\src\main\java">
+            <!--
+                enableSubPackage：是否使用子包，为true则包名的每个点代表一个包，反之则是一个目录
+                trimStrings：去掉字符串前后的空格
+            -->
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- SQL映射文件生成策略 -->
+        <sqlMapGenerator targetPackage="com.hxz.mybatis.mapper" targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- Mapper接口生成策略 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hxz.mybatis.mapper" targetProject=".\src\main\java\">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 逆向分析的表 -->
+        <!-- tableName设置为*号，可以对应所有的表，此时不写domainObjectName -->
+        <!-- domainObjectName属性指定生成出来的实体类类名 -->
+        <table tableName="t_dept" domainObjectName="Dept"/>
+        <table tableName="t_emp" domainObjectName="Emp"/>
+        <table tableName="t_user" domainObjectName="User"/>
+    </context>
+</generatorConfiguration>
