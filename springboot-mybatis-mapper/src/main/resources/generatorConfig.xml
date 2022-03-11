@@ -4,6 +4,11 @@
 
 <!-- 通用mapper 代码生成配置 -->
 <generatorConfiguration>
+    <!--
+        targetRuntime:
+            MyBatis3Simple：简单版，只生成mapper接口和映射文件，实体类，不生成mapper相关的方法
+            MyBatis3：复杂简单版，只生成mapper接口和映射文件，实体类和Example，同时生成mapper相关的方法
+     -->
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <!-- mapper层继承的接口 -->
@@ -12,8 +17,10 @@
             <property name="javaFileEncoding" value="UTF-8"/>
             <!-- 是否使用mapper生成注释 -->
             <property name="useMapperCommentGenerator" value="false"/>
-            <!-- 生成model时的lombok的注解-->
-            <property name="lombok" value="Getter,Setter,ToString,Accessors"/>
+            <!-- 生成model时的lombok的注解 -->
+            <property name="lombok" value="Data"/>
+            <!-- swagger 注解 -->
+            <!-- <property name="swagger" value="true"/>-->
             <!--  是否强制生成注解 -->
             <property name="forceAnnotation" value="true"/>
             <!-- 开始符，用于关键字 -->
@@ -31,12 +38,20 @@
                         password="123456">
         </jdbcConnection>
 
+        <!--
+            下面的节点需要注意 targetProject 参数值
+                使用java代码生成时需要加上项目名称，例如：src/main/java
+                使用maven插件生成时不需要加项目名称，例如：src/main/java
+        -->
+
         <!-- 实体类 -->
         <javaModelGenerator targetPackage="com.hxz.entity"
                             targetProject="src/main/java"/>
+
         <!-- mapper xml -->
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources"/>
+
         <!-- mapper -->
         <javaClientGenerator targetPackage="com.hxz.mapper"
                              targetProject="src/main/java"
@@ -45,5 +60,7 @@
         <!-- 需要生成的表 -->
         <table tableName="role"/>
         <table tableName="user"/>
+        <!-- 使用%表示生成全部 -->
+        <!--        <table tableName="%"/>-->
     </context>
 </generatorConfiguration>

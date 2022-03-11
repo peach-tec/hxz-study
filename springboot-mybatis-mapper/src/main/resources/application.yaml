@@ -1,6 +1,7 @@
 server:
   port: 8080
 spring:
+  # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://10.1.8.41:3306/test001
@@ -16,6 +17,7 @@ mybatis:
     cache-enabled: true # 开启二级缓存
     lazy-loading-enabled: true # 懒加载，分布查询时需要开启
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志输出
+
 
 # 通用mapper 配置
 mapper:
