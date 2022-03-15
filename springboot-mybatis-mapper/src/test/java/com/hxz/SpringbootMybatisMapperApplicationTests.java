@@ -10,6 +10,7 @@ package com.hxz;
 //
 //import java.util.List;
 
+import com.hxz.entity.Role;
 import com.hxz.entity.User;
 import com.hxz.mapper.RoleMapper;
 import com.hxz.mapper.UserMapper;
@@ -31,6 +32,20 @@ public class SpringbootMybatisMapperApplicationTests {
     private UserMapper userMapper;
     @Autowired
     private RoleMapper roleMapper;
+
+    /**
+     * 新增角色测试自增主键
+     */
+    @Test
+    public void addRole() {
+        for (int i = 0; i < 10; i++) {
+            Role role = new Role();
+            role.setRoleName("角色" + i + 1);
+            roleMapper.insert(role);
+            System.out.println("角色" + i + 1 + "的ID为：" + role.getId());
+        }
+    }
+
 
     @Test
     public void userList() {

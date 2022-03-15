@@ -7,6 +7,8 @@ spring:
     url: jdbc:mysql://10.1.8.41:3306/test001
     username: root
     password: 123456
+  redis:
+    host: 127.0.0.1
 
 # mybatis 配置
 mybatis:
