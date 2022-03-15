@@ -2,6 +2,7 @@ package com.hxz.entity;
 
 import javax.persistence.*;
 import lombok.Data;
+import tk.mybatis.mapper.annotation.KeySql;
 
 /**
  * 表名：user
@@ -14,6 +15,7 @@ public class User {
      */
     @Id
     @Column(name = "`id`")
+    @KeySql
     private String id;
 
     /**
