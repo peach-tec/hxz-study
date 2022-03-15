@@ -15,7 +15,7 @@ public class User {
      */
     @Id
     @Column(name = "`id`")
-    @KeySql
+    //@KeySql
     private String id;
 
     /**

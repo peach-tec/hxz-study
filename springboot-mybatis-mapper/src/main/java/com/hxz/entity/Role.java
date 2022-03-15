@@ -1,14 +1,10 @@
 package com.hxz.entity;
 
 import lombok.Data;
-import tk.mybatis.mapper.annotation.KeySql;
 import tk.mybatis.mapper.annotation.NameStyle;
-import tk.mybatis.mapper.code.IdentityDialect;
 import tk.mybatis.mapper.code.Style;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 表名：role
@@ -22,7 +18,8 @@ public class Role {
      */
     @Id
     @Column(name = "`id`")
-    @KeySql(useGeneratedKeys = true, dialect = IdentityDialect.MYSQL)
+    //@KeySql(useGeneratedKeys = true, dialect = IdentityDialect.MYSQL)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     /**
