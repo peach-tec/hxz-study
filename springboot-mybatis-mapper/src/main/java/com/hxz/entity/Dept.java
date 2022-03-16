@@ -1,11 +1,12 @@
 package com.hxz.entity;
 
-import com.hxz.DefineSql;
+import com.hxz.gener.UUIDSql;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
-import tk.mybatis.mapper.code.ORDER;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 表名：dept
@@ -20,7 +21,8 @@ public class Dept {
     @Column(name = "`id`")
     //@KeySql(sql = "select uuid()", order = ORDER.BEFORE)
     //@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "select uuid()")
-    @KeySql(genSql = DefineSql.class, order = ORDER.BEFORE)
+    //@KeySql(genSql = DefineSql.class, order = ORDER.BEFORE)
+    @KeySql(genId = UUIDSql.class)
     private String id;
 
     /**
