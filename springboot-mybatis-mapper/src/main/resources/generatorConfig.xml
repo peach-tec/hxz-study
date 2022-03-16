@@ -33,14 +33,14 @@
 
         <!-- 配置数据库 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://10.1.8.41:3306/test001"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/test001?serverTimezone=Asia/Shanghai"
                         userId="root"
                         password="123456">
         </jdbcConnection>
 
         <!--
             下面的节点需要注意 targetProject 参数值
-                使用java代码生成时需要加上项目名称，例如：src/main/java
+                使用java代码生成时需要加上项目名称，例如：springboot-mybatis-mapper/src/main/java
                 使用maven插件生成时不需要加项目名称，例如：src/main/java
         -->
 
@@ -58,8 +58,9 @@
                              type="XMLMAPPER"/>
 
         <!-- 需要生成的表 -->
-        <table tableName="role"/>
-        <table tableName="user"/>
+<!--        <table tableName="role"/>-->
+<!--        <table tableName="user"/>-->
+        <table tableName="dept"/>
         <!-- 使用%表示生成全部 -->
         <!--        <table tableName="%"/>-->
     </context>

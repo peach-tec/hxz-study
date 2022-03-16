@@ -19,7 +19,7 @@ public class Role {
     @Id
     @Column(name = "`id`")
     //@KeySql(useGeneratedKeys = true, dialect = IdentityDialect.MYSQL)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "JDBC")
     private String id;
 
     /**

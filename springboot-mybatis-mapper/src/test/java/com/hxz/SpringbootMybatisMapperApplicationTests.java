@@ -10,8 +10,10 @@ package com.hxz;
 //
 //import java.util.List;
 
+import com.hxz.entity.Dept;
 import com.hxz.entity.Role;
 import com.hxz.entity.User;
+import com.hxz.mapper.DeptMapper;
 import com.hxz.mapper.RoleMapper;
 import com.hxz.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
@@ -32,6 +34,43 @@ public class SpringbootMybatisMapperApplicationTests {
     private UserMapper userMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private DeptMapper deptMapper;
+
+    /**
+     * 新增部门测试主键
+     */
+    @Test
+    public void addDept() {
+        // 使用KeySql
+        for (int i = 0; i < 10; i++) {
+            Dept dept = new Dept();
+            dept.setDeptName("部门" + i);
+            deptMapper.insert(dept);
+            System.out.println("部门" + i + "的ID为：" + dept.getId());
+        }
+    }
+
+    @Test
+    public void addDept01() {
+        //使用GeneratedValue
+        for (int i = 0; i < 10; i++) {
+            Dept dept = new Dept();
+            dept.setDeptName("部门" + i);
+            deptMapper.insertDept(dept);
+            System.out.println("部门" + i + "的ID为：" + dept.getId());
+        }
+    }
+    @Test
+    public void addDept02() {
+        // 使用  @KeySql(genSql = DefineSql.class)
+        for (int i = 0; i < 10; i++) {
+            Dept dept = new Dept();
+            dept.setDeptName("部门" + i);
+            deptMapper.insertDept(dept);
+            System.out.println("部门" + i + "的ID为：" + dept.getId());
+        }
+    }
 
     /**
      * 新增角色测试自增主键

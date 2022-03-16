@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxz.mapper.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.hxz.entity.Dept">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+    </resultMap>
+    <insert id="insertDept">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into dept (id, dept_name)
+        values (#{id},#{deptName})
+    </insert>
+</mapper>
