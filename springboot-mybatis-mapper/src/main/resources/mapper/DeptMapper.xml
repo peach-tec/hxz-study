@@ -12,7 +12,19 @@
         <selectKey keyProperty="id" resultType="String" order="BEFORE">
             select uuid()
         </selectKey>
-        insert into dept (id, dept_name)
+        insert into test001.dept (id, dept_name)
         values (#{id},#{deptName})
     </insert>
+    <select id="selectAllByPage" resultType="com.hxz.entity.Dept">
+        select *
+        from test001.dept
+    </select>
+    <select id="selectByPageNumSize" resultType="com.hxz.entity.Dept">
+        select *
+        from test001.dept
+    </select>
+    <select id="selectAllByParamsWithPageNumSize" resultType="com.hxz.entity.Dept">
+        select *
+        from test001.dept
+    </select>
 </mapper>

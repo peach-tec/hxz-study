@@ -4,11 +4,11 @@ spring:
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test001?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.0.109:3306/test001?serverTimezone=Asia/Shanghai
     username: root
     password: 123456
   redis:
-    host: 127.0.0.1
+    host: 192.168.0.109
 
 # mybatis 配置
 mybatis:
@@ -20,7 +20,6 @@ mybatis:
     lazy-loading-enabled: true # 懒加载，分布查询时需要开启
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志输出
 
-
 # 通用mapper 配置
 mapper:
   not-empty: true  # 判断字符串类型 != ''
@@ -30,5 +29,5 @@ pagehelper:
   helper-dialect: mysql # 定分页插件使用哪种方言,oracle,mysql,mariadb,sqlite,hsqldb,postgresql,db2,sqlserver,informix,h2,sqlserver2012,derby
   page-size-zero: true # pageSize=0 或者 RowBounds.limit = 0 就会查询出全部的结果
   support-methods-arguments: true # 通过 Mapper 接口参数来传递分页参数
-  auto-runtime-dialect: true # 动识别对应方言的分页
-
+  reasonable: true
+  params: count=countSql
