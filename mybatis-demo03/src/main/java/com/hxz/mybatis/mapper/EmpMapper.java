@@ -2,7 +2,10 @@ package com.hxz.mybatis.mapper;
 
 import com.hxz.mybatis.entity.Emp;
 import com.hxz.mybatis.entity.EmpExample;
+
 import java.util.List;
+
+import com.hxz.mybatis.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface EmpMapper {
@@ -93,4 +96,6 @@ public interface EmpMapper {
      * @mbg.generated Mon Mar 07 20:05:27 CST 2022
      */
     int updateByPrimaryKey(Emp record);
+
+    List<Emp> selectByPageNumSize(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 }

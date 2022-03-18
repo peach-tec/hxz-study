@@ -29,4 +29,12 @@ public class TestDemo {
         PageInfo<Emp> page = new PageInfo<>(emps,5);
         System.out.println(page);
     }
+
+    @Test
+    public void test02() {
+        EmpMapper mapper = MybatisUtils.getMapper(EmpMapper.class);
+        List<Emp> emps = mapper.selectByPageNumSize(1,5);
+        // 获取分页相关信息
+        System.out.println(emps);
+    }
 }
