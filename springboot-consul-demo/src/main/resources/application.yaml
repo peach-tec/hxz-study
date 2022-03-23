@@ -5,15 +5,15 @@ spring:
     name: consul-demo
   cloud:
     consul:
-      host: 127.0.0.1  # consul ??????
-      port: 8500   # consul ??????
-      enabled: true # ????consul
-      # ???????
+      host: 127.0.0.1  # consul 注册中心地址
+      port: 8500   # consul 端口
+      enabled: true # 开启consul
+      # 服务提供者信息
       discovery:
-        register: true # ??????
-        instance-id: ${spring.application.name}-01  # ????ID, ????
-        service-name: ${spring.application.name} # ????
-        port: ${server.port} # ????
-        prefer-ip-address: true # ????IP????
-        ip-address: ${spring.cloud.client.ip-address} # ????IP
+        register: true # 开启注册
+        instance-id: ${spring.application.name}-01  # 注册实例ID, 保证唯一
+        service-name: ${spring.application.name} # 服务名称
+        port: ${server.port} # 服务端口
+        prefer-ip-address: true # 是否使用IP注册
+        ip-address: ${spring.cloud.client.ip-address} # 服务请求IP
 
