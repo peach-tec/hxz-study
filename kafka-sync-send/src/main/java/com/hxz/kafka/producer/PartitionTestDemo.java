@@ -18,7 +18,7 @@ public class PartitionTestDemo {
         // kafka属性配置
         Properties properties = new Properties();
         // 连接kafka
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.124:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.120:9092");
         // k-v序列化
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
@@ -27,11 +27,11 @@ public class PartitionTestDemo {
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
 
         // 发送数据
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             // 发送到指定分区
-//            designPartition(producer, i);
+            designPartition(producer, i % 3);
             // 不指定分区发送
-            notDesignPartition(producer, i);
+//            notDesignPartition(producer, i);
         }
 
         // 关闭资源
@@ -42,7 +42,7 @@ public class PartitionTestDemo {
      * 指定分区发送
      */
     public static void designPartition(KafkaProducer<String, String> producer, int i) {
-        producer.send(new ProducerRecord<String, String>("first", 0, "", "测试发送到指定的分区" + i), new Callback() {
+        producer.send(new ProducerRecord<String, String>("first", i, "", "测试发送到指定的分区" + i), new Callback() {
             @Override
             public void onCompletion(RecordMetadata data, Exception e) {
                 if (e == null) {
