@@ -11,40 +11,34 @@ import java.util.Properties;
 /**
  * @author 華小灼
  * @version V1.0
- * @desc 消费者
+ * @desc 消费者异步提交offset
  * @copyright &copy; DYH
  * @date 2022-03-28-21:29
  * @address 成都
  */
-public class CustomConsumer {
+public class CustomConsumeraAsync {
     public static void main(String[] args) {
-        // 配置
         Properties properties = new Properties();
-        // 连接kafka
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.120:9092");
-        // 反序列化
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        // 配置消费者groupid, 注意：必须的配置此参数
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "first_01");
-
-        // 配置分区分配策略，可配置参数: RangeAssignor RoundRobinAssignor StickyAssignor CooperativeStickyAssignor
         properties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, RangeAssignor.class.getName());
 
-        // 创建消费者
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
+        // 手动提交配置
+        properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-        // 订阅主题
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         List<String> topics = new ArrayList<>();
         topics.add("first");
         consumer.subscribe(topics);
-
-        // 消费数据
         while (true) {
             ConsumerRecords<String, String> poll = consumer.poll(Duration.ofSeconds(5)); // 间隔5秒拉取数据
             for (ConsumerRecord<String, String> record : poll) {
                 System.out.println(record);
             }
+            // 异步提交offset
+            consumer.commitAsync();
         }
     }
 }

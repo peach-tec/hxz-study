@@ -1,12 +1,17 @@
 package com.hxz.kafka.consumer;
 
-import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author 華小灼
@@ -16,30 +21,33 @@ import java.util.Properties;
  * @date 2022-03-28-21:29
  * @address 成都
  */
-public class CustomConsumer {
+public class CustomConsumerSeek {
     public static void main(String[] args) {
-        // 配置
         Properties properties = new Properties();
-        // 连接kafka
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.120:9092");
-        // 反序列化
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        // 配置消费者groupid, 注意：必须的配置此参数
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "first_01");
 
-        // 配置分区分配策略，可配置参数: RangeAssignor RoundRobinAssignor StickyAssignor CooperativeStickyAssignor
-        properties.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, RangeAssignor.class.getName());
+        // 修改消费方式  earliest、latest、none
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
-        // 创建消费者
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
-
-        // 订阅主题
         List<String> topics = new ArrayList<>();
         topics.add("first");
         consumer.subscribe(topics);
 
-        // 消费数据
+        // 指定位置进行消费
+        Set<TopicPartition> partitions = consumer.assignment();
+        // 保证分区分配方案已经制定完成
+        while (partitions.size() == 0) {
+            consumer.poll(Duration.ofSeconds(1));// 拉取一次数据
+            partitions = consumer.assignment();// 更新
+        }
+        for (TopicPartition partition : partitions) {
+            consumer.seek(partition, 100); // 指定消费的offset
+        }
+
         while (true) {
             ConsumerRecords<String, String> poll = consumer.poll(Duration.ofSeconds(5)); // 间隔5秒拉取数据
             for (ConsumerRecord<String, String> record : poll) {
