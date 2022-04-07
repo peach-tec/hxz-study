@@ -22,6 +22,7 @@ import java.util.concurrent.Executors;
  */
 @Component
 public class KafkaProducer {
+    // 引入kafka模板
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
 
@@ -32,7 +33,7 @@ public class KafkaProducer {
 
     private ExecutorService pool = Executors.newFixedThreadPool(10);
 
-    @Scheduled(cron = "0/2 * * * * ?")
+    @Scheduled(cron = "0/2 * * * * ?") // 通过定时任务循环发送
     public void send() {
         for (int i = 0; i < 100; i++) {
             int finalI = i;

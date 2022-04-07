@@ -1,8 +1,8 @@
 package com.hxz.kafka.task;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @date 2022/3/24-10:39
  * @address 成都
  */
-@Component
+@Configuration
 public class KafkaConsumer {
 
     @KafkaListener(topics = "${test.topic}", groupId = "testTopicGroup")

@@ -5,15 +5,15 @@ spring:
   application:
     name: kafka-demo
   kafka:
-    bootstrap-servers: 127.0.0.1:9092
+    bootstrap-servers: 192.168.0.120:9092 # 连接kafka
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer # key序列化
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer # value序列化
     consumer:
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      enable-auto-commit: true
-
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer # key反序列化
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer # value反序列化
+      enable-auto-commit: true # 自动提交
+#      group-id: testTopicGroup # 指定消费者组，也可以在方法注解中加组信息
 
 test:
   topic: testTopic
