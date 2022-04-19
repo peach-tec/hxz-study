@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 服务消费这配置 -->
+    <!-- 扫描包 -->
+    <context:component-scan base-package="com.hxz.dubbo.service"/>
+    <!-- 指定当前应用名称 -->
+    <dubbo:application name="dubbo-consumer-demo"/>
+    <!-- 指定注册中心地址 -->
+    <dubbo:registry address="zookeeper://192.168.0.132:2181,192.168.0.133:2181,192.168.0.134:2181"/>
+    <!-- 超时时间 -->
+    <dubbo:consumer timeout="3000"/>
+    <!-- 声明需要调用的远程服务接口, 生成远程服务的代理 -->
+    <dubbo:reference id="providerService" interface="com.hxz.dubbo.service.IProviderDemoService"/>
+</beans>
