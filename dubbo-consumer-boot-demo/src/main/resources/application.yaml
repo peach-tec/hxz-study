@@ -1,0 +1,17 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: dubbo-consumer-boot-demo
+dubbo:
+  # 应用相关
+  application:
+    name: ${spring.application.name} # dubbo 应用名称
+  # 注册中心相关
+  registry:
+    protocol: zookeeper  # 注册协议 zookeeper  nacos multicast redis
+    address: 192.168.0.132:2181,192.168.0.133:2181,192.168.0.134:2181  # 注册地址
+    register: true
+  # 监控中心
+  monitor:
+    protocol: register  # 协议
