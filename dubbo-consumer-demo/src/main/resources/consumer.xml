@@ -14,4 +14,7 @@
     <dubbo:consumer timeout="3000"/>
     <!-- 声明需要调用的远程服务接口, 生成远程服务的代理 -->
     <dubbo:reference id="providerService" interface="com.hxz.dubbo.service.IProviderDemoService"/>
+    <!-- 配置监控中心 -->
+    <dubbo:monitor protocol="registry"/> <!-- 自动发现 -->
+    <!--    <dubbo:monitor address="127.0.0.1:7070"/>&lt;!&ndash; 指定监控中心地址 &ndash;&gt;-->
 </beans>
