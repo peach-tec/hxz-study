@@ -18,7 +18,7 @@ import java.util.UUID;
  * @address 成都
  */
 @Service
-@DubboService(group = "${spring.application.name}",version = "1.0.0")  // 暴露服务
+@DubboService(group = "${spring.application.name}",version = "1.0.0",loadbalance = "random")  // 暴露服务.// 轮询值loadbalance ：consistenthash leastactive random roundrobin shortestresponse
 public class ProdiverDemoService implements IProviderDemoService {
     @Override
     public List<DemoEntity> list() {

@@ -12,8 +12,8 @@
     <dubbo:registry address="zookeeper://192.168.0.132:2181,192.168.0.133:2181,192.168.0.134:2181"/>
     <!-- 超时时间 -->
     <dubbo:consumer timeout="3000"/>
-    <!-- 声明需要调用的远程服务接口, 生成远程服务的代理 -->
-    <dubbo:reference id="providerService" interface="com.hxz.dubbo.service.IProviderDemoService"/>
+    <!-- 声明需要调用的远程服务接口, 生成远程服务的代理 轮询值loadbalance ：consistenthash leastactive random roundrobin shortestresponse -->
+    <dubbo:reference id="providerService" interface="com.hxz.dubbo.service.IProviderDemoService" loadbalance="random"/>
     <!-- 配置监控中心 -->
     <dubbo:monitor protocol="registry"/> <!-- 自动发现 -->
     <!--    <dubbo:monitor address="127.0.0.1:7070"/>&lt;!&ndash; 指定监控中心地址 &ndash;&gt;-->
