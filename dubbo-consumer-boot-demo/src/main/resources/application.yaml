@@ -11,7 +11,8 @@ dubbo:
   registry:
     protocol: zookeeper  # 注册协议 zookeeper  nacos multicast redis
     address: 192.168.0.132:2181,192.168.0.133:2181,192.168.0.134:2181  # 注册地址
-    register: true
+    register: true # 是否向此注册中心注册服务，如果设为false，将只订阅，不注册
+    check: false  # 注册中心不存在时，是否报错
   # 监控中心
   monitor:
     protocol: register  # 协议

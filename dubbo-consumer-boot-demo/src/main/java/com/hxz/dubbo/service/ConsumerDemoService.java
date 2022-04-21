@@ -16,7 +16,8 @@ import java.util.List;
  */
 @Service
 public class ConsumerDemoService implements IConsumerDemoService {
-    @DubboReference(group = "dubbo-provider-boot-demo", version = "1.0.0") // 远程调用服务
+//    @DubboReference(group = "dubbo-provider-boot-demo", version = "1.0.0") // 远程调用服务
+    @DubboReference(group = "dubbo-provider-boot-demo", version = "1.0.0",url = "127.0.0.1:20881") // 远程调用服务, 直接连接服务提供者
     private IProviderDemoService providerService;
 
     @Override
