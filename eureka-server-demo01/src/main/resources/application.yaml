@@ -1,0 +1,17 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: eureka-server-demo
+
+# Eureka 配置
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}:${server.port}  # 主机名，不配置会获取系统主机名
+    prefer-ip-address: true # 是否使用IP注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 实例ID
+  client:
+    register-with-eureka: true # 是否将自己注册到注册中心，默认true，单节点建议关闭
+    fetch-registry: true # 是否从注册中心获取注册信息，默认true，单节点建议关闭
+    service-url: # 注册中心对外暴露的地址,指向一个注册中心
+      defaultZone: http://localhost:8002/eureka/
