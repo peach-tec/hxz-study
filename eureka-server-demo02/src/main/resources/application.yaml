@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: eureka-server-demo
+  security:
+    user:
+      name: root
+      password: 123456
 
 # Eureka 配置
 eureka:
@@ -14,4 +18,4 @@ eureka:
     register-with-eureka: true # 是否将自己注册到注册中心，默认true，单节点建议关闭
     fetch-registry: true # 是否从注册中心获取注册信息，默认true，单节点建议关闭
     service-url: # 注册中心对外暴露的地址,指向一个注册中心
-      defaultZone: http://localhost:8001/eureka/
+      defaultZone: http://root:123456@localhost:8001/eureka/

@@ -13,7 +13,7 @@ eureka:
     register-with-eureka: true # 是否将自己注册到注册中心，默认true
     fetch-registry: true # 是否从注册中心获取注册信息，默认true
     service-url: # 指向注册中心
-      defaultZone: http://localhost:8002/eureka/,http://localhost:8001/eureka/
+      defaultZone: http://root:123456@localhost:8002/eureka/,http://root:123456@localhost:8001/eureka/
 
 management:
   endpoints:
