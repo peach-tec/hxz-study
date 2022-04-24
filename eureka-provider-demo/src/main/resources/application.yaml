@@ -14,3 +14,12 @@ eureka:
     fetch-registry: true # 是否从注册中心获取注册信息，默认true
     service-url: # 指向注册中心
       defaultZone: http://localhost:8002/eureka/,http://localhost:8001/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: shutdown  # 开启shutdown端点访问
+  endpoint:
+    shutdown:
+      enabled: true  # 开启shutdown优雅停服
