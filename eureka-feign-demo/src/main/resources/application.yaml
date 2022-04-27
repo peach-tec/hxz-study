@@ -1,0 +1,39 @@
+server:
+  port: 8006
+  compression: # 压缩配置，全局开启 request-consumer-provider 之间都生效
+    enabled: true  # 开启压缩
+    mime-types: text/html,text/plain,text/xml,application/xml,application/json  # 配置压缩支持的MIME TYPE
+
+spring:
+  application:
+    name: eureka-feign-demo
+
+# Eureka 配置
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}:${server.port}  # 主机名，不配置会获取系统主机名
+    prefer-ip-address: true # 是否使用IP注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 实例ID
+  client:
+    register-with-eureka: true # 是否将自己注册到注册中心，默认true
+    fetch-registry: true # 是否从注册中心获取注册信息，默认true
+    service-url: # 指向注册中心
+      defaultZone: http://root:123456@localhost:8002/eureka/,http://root:123456@localhost:8001/eureka/
+    registry-fetch-interval-seconds: 10 # 拉取Eureka注册信息间隔时间
+
+# 压缩传输，局部，只在 consumer-provider之间生效
+#feign:
+#  compression:
+#    request:
+#      mime-types: text/xml,application/xml,application/json  # 配置压缩支持的MIME TYPE
+#      min-request-size: 512  # 配置压缩数据大小的最小阈值，默认2048
+#      enabled: true  # 请求是否开启gzip压缩
+#    response:
+feign:
+  httpclient:
+    enabled: true
+#      enabled: true  # 响应是否开启gzip压缩
+
+logging: # 日志级别
+  level:
+    root: debug
