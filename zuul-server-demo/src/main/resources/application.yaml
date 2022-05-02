@@ -17,6 +17,7 @@ spring:
 
 # Zuul 路由规则
 zuul:
+  retryable: true # 开启重试
   SendErrorFilter:
     error:
       disable: true # 停用内置的默认异常处理器
@@ -49,6 +50,7 @@ zuul:
   ignored-services: eureka-provider-demo # 据服务名排除，多个服务逗号分割， '*' 排除所有
   prefix: /api
 
+
 #  ignored-patterns: /**/list  # 排除所有请求路径中有 list 的请求，排除多个用逗号分割
 #      url: http://localhost:8006/ # 映射路径对应的微服务地址
 
@@ -73,3 +75,21 @@ management:
     web:
       exposure:
         include: hystrix.stream
+
+# Hystrix 超时时间设置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 # 线程池隔离，默认超时时间1000ms
+# Ribbon 超时时间，建议小于Hystrix
+ribbon:
+  ConnectTimeout: 5000 # 请求连接的超时时间，默认1000ms
+  ReadTimeout: 5000 # 请求处理的超时时间，默认1000ms
+  # 重试次数
+  MaxAutoRetries: 1 # 表示访问集群下原节点的重试次数(同路径访问)
+  MaxAutoRetriesNextServer: 1 # 表示访问集群下其他节点重试次数(换了一台服务器)
+  # Ribbon 开启重试
+  OkToRetryOnAllOperations: true

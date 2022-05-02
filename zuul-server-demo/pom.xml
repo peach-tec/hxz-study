@@ -17,6 +17,11 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <!-- 重试机制 -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
         <!-- 连接池 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
