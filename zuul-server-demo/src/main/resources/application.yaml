@@ -1,0 +1,32 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zuul-server-demo
+
+# Zuul 路由规则
+zuul:
+  routes:
+    eureka-feign: # 路由ID，自定义，建议配置成对应服务的服务名
+      path: /consumer/** # 请求url的映射路径
+      serviceId: eureka-feign-demo # 根据服务名自动从服务注册中心获取服务地址并转发
+  ignored-services: eureka-provider-demo # 据服务名排除，多个服务逗号分割， '*' 排除所有
+  prefix: /api
+
+#  ignored-patterns: /**/list  # 排除所有请求路径中有 list 的请求，排除多个用逗号分割
+#      url: http://localhost:8006/ # 映射路径对应的微服务地址
+
+
+
+# Eureka 配置
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}:${server.port}  # 主机名，不配置会获取系统主机名
+    prefer-ip-address: true # 是否使用IP注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} # 实例ID
+  client:
+    register-with-eureka: true # 是否将自己注册到注册中心，默认true
+    fetch-registry: true # 是否从注册中心获取注册信息，默认true
+    service-url: # 指向注册中心
+      defaultZone: http://root:123456@localhost:8002/eureka/,http://root:123456@localhost:8001/eureka/
+    registry-fetch-interval-seconds: 10 # 拉取Eureka注册信息间隔时间
