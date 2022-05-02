@@ -30,3 +30,10 @@ eureka:
     service-url: # 指向注册中心
       defaultZone: http://root:123456@localhost:8002/eureka/,http://root:123456@localhost:8001/eureka/
     registry-fetch-interval-seconds: 10 # 拉取Eureka注册信息间隔时间
+
+# 度量指标监控和健康检查
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
