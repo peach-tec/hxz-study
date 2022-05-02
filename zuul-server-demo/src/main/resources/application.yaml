@@ -3,9 +3,45 @@ server:
 spring:
   application:
     name: zuul-server-demo
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000
+    database: 0
+    lettuce:
+      pool:
+        max-active: 1024
+        max-idle: 200
+        max-wait: 10000
+        min-idle: 5
 
 # Zuul 路由规则
 zuul:
+  SendErrorFilter:
+    error:
+      disable: true # 停用内置的默认异常处理器
+  # 服务限流
+  ratelimit:
+    enabled: true  # 开启限流保护
+    repository: redis # 限流数据储存方式
+    policy-list: # 局部限流配置，优先级高于全部
+      eureka-feign-demo: # 需要限流的服务名
+        - limit: 5 # 每个刷新间隔窗口的请求数量限制
+          quota: 1000 # 单位时间内累计请求时间限制（秒）
+          refresh-interval: 60 # 限流时间窗口，默认60
+          type: # 限流方式
+            - USER
+            - ORIGIN
+            - URL
+  #    default-policy-list: # 全局策略，默认
+  #      - limit: 3 # 每个刷新间隔窗口的请求数量限制
+  #        quota: 1000 # 单位时间内累计请求时间限制（秒）
+  #        refresh-interval: 60 # 限流时间窗口，默认60
+  #        type: # 限流方式
+  #          - USER
+  #          - ORIGIN
+  #          - URL
+  # 路由规则
   routes:
     eureka-feign: # 路由ID，自定义，建议配置成对应服务的服务名
       path: /consumer/** # 请求url的映射路径
