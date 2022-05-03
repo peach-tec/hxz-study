@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: csdn-visits-demo
+hxz:
+  csdn:
+    csdn-url: https://blog.csdn.net/weixin_45481406
+    time: ${random.long(1,10)}
+    article-url:
+      - https://blog.csdn.net/weixin_45481406/article/details/124529022
+      - https://blog.csdn.net/weixin_45481406/article/details/124529006
+      - https://blog.csdn.net/weixin_45481406/article/details/124436315
+    size: 100
+    business-type: blog
+    username: qq_43284469
+    api-url: https://blog.csdn.net/community/home-api/v1/get-business-list
+
+#logging:
+#  level:
+#    root: warn
