@@ -18,6 +18,11 @@
     <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
         insert into t_user (username, password, age, sex, email) VALUES (#{username}, #{password}, #{age}, #{sex}, #{email})
     </insert>
+
+    <insert id="insertSnow">
+        insert into snow (id) values ('${@com.hxz.mybatis.utils.SnowflakeIdWorker@create()}')
+    </insert>
+
     <delete id="deleteBatch">
         <!-- #{}的方式会自动添加单引号导致ID格式错误而抛出异常 -->
         <!-- delete from t_user where id in (#{ids}) -->

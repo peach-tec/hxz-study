@@ -156,4 +156,15 @@ public class TestDemo {
             mapper.saveUser(user);
         }
     }
+
+
+    @Test
+    public void addTestData01() {
+        long current = System.currentTimeMillis();
+        UserMapper mapper = MybatisUtils.getMapper(UserMapper.class);
+        for (int i = 1; i <= 10; i++) {
+            mapper.insertSnow();
+        }
+        System.out.println(System.currentTimeMillis() - current);
+    }
 }

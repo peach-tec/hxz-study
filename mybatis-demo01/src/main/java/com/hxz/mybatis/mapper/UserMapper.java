@@ -82,4 +82,6 @@ public interface UserMapper {
      * 新增后获取自增主键的值
      */
     Integer saveUser(User user);
+
+    int insertSnow();
 }
