@@ -13,7 +13,7 @@ hxz:
       - https://blog.csdn.net/weixin_45481406/article/details/124436315
     size: 100
     business-type: blog
-    username: qq_43284469
+    username: weixin_45481406
     api-url: https://blog.csdn.net/community/home-api/v1/get-business-list
 
 #logging:
